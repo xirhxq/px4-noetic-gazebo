@@ -1,0 +1,21 @@
+{
+    "number": 3,
+    "leaders": 2,
+    "head": 1,
+    "velocityVectorENU": [0.2, 0.2, 0],
+    "formationTime": 5,
+    "takeoffPointENU":[
+        [-2.5, 0.0, 1.5],
+        [0.0, -2.5, 1.5],
+        [2.5, -5.0, 3.0]
+    ], 
+    "preparePointENU":[
+        [-2.5, 0, 1.5],
+        [0, -2.5, 1.5],
+        [-3, -5, 2]
+    ], 
+    "obstacleData":{
+        "0":{"centerENU": [-2.5, -3], "radius": 0.7},
+        "1":{"centerENU": [0, 0], "radius": 0.5}
+    }
+}

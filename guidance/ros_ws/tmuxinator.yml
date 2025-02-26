@@ -1,0 +1,44 @@
+name: px4-noetic-gazebo-multi-uav-formation
+root: .
+
+on_project_start: catkin build
+
+tmux_options: -f .tmux.conf
+windows:
+  - main:
+      layout: main-horizontal
+      panes:
+
+        - . get_params.sh <%= @settings["scene"] %>;
+          sleep 20;
+          ./multi_uav_formation.sh <%= @settings["scene"] %> $UAV_NUM
+
+
+        - roscore
+
+        - . get_params.sh <%= @settings["scene"] %>;
+          catkin clean --yes;
+          catkin build;
+          . devel/setup.bash;
+          . /tmp/setup_environment.sh;
+          roslaunch multi_uav_formation multi_uav_mavros_sitl.launch
+
+        - sleep 3;
+          rviz -d visualize_obstacles.rviz
+
+  - rosbag_recorder:
+      panes:
+        - . /tmp/setup_environment.sh;
+          sleep 20;
+          roscd multi_uav_formation;
+          cd /app/guidance/ros_ws;
+          sudo mkdir -p bag_files;
+          cd bag_files;
+          sleep 5;
+          rosbag record -e '/.*/mavros/local_position/pose|/.*/mavros/local_position/velocity_local|/.*/mavros/setpoint_raw/local|/.*/mavros/setpoint_raw/attitude'
+
+  # - add_permission:
+  #     panes:
+  #       - |
+  #         chmod +x src/multi_uav_formation/multi_uav_formation/SingleRun.py;
+  #         chmod +x *.sh
