@@ -14,7 +14,7 @@ chmod +x docker/run_docker.sh
 ./docker/run_ros_docker.sh
 
 # run all the commands
-tmuxinator start . -p scene=two_obstacles
+tmuxinator start . -p tmuxinator.yml scene=two_obstacles
 
 # to exit tmuxinator, press `Ctrl+b` and then `q` in any pane
 
