@@ -11,7 +11,7 @@ A repository of running multi-quadrotor simulations in Gazebo with PX4 inside Do
 ```bash
 # in root directory
 chmod +x docker/run_docker.sh
-./docker/run_ros_docker.sh
+./docker/run_docker.sh
 
 # run all the commands
 tmuxinator start . -p tmuxinator.yml scene=two_obstacles
